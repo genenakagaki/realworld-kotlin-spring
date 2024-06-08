@@ -1,0 +1,13 @@
+* Realworld Kotlin Spring Implementation
+
+
+
+** Development
+
+*** Generating Kotlin files with the OpenAPI Generator 
+When the OpenAPI Spec changes, you have to run the generator.
+
+1. Run the gradle command: =web:openApiGenerate=.
+2. Pick the things you need and put it in the project.
+3. Adjust the code for webflux, since the generator generates the code with mvc
+

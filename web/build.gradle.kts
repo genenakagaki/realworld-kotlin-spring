@@ -3,6 +3,7 @@ plugins {
     id("io.spring.dependency-management")
     kotlin("jvm")
     kotlin("plugin.spring")
+    id("org.openapi.generator") version "7.5.0"
 }
 
 group = "com.realworld.web"
@@ -27,6 +28,7 @@ dependencies {
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+    implementation("org.springdoc:springdoc-openapi-starter-webflux-api:2.5.0")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -38,4 +40,17 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+openApiGenerate {
+    validateSpec.set(true)
+    generatorName.set("kotlin-spring")
+    outputDir.set("$projectDir/temp")
+    inputSpec.set("$projectDir/src/main/resources/openapi.yaml")
+    apiPackage.set("com.realworld.web.generated.api")
+    modelPackage.set("com.realworld.web.generated.model")
+    cleanupOutput.set(true)
+    generateModelDocumentation.set(false)
+    generateApiDocumentation.set(false)
+    configOptions.put("useSpringBoot3", "true")
 }
