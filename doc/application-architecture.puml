@@ -1,0 +1,15 @@
+@startuml 
+left to right direction
+
+node web  
+
+node application {
+    node domain 
+}
+
+node persistence
+
+web -(0- application
+application -0)- persistence
+
+@enduml
